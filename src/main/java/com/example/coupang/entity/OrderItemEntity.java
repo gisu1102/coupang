@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class OrderItemEntity {
     @Id
     @GeneratedValue
+    @Column (name = "orderItem_id")
     private Long id;
-    private int quantity;
     private double price;
 
 
@@ -21,6 +21,13 @@ public class OrderItemEntity {
 
     @ManyToOne
     @JoinColumn(name = "item_id", nullable = false)
-    private  ItemEntity item;
+    private  ItemEntity itemEntity;
+
+    // 생성자
+    public OrderItemEntity(OrderEntity orderEntity, ItemEntity itemEntity) {
+        this.orderEntity = orderEntity;
+        this.itemEntity = itemEntity;
+        this.price = itemEntity.getItemPrice();
+    }
 
 }

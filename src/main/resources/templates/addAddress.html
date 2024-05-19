@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주소 추가</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>주소 추가</h2>
+    <form action="/myPage/addAddress" method="post">
+        <div class="form-group">
+            <label for="zipcode">우편번호:</label>
+            <input type="text" id="zipcode" name="zipcode" required>
+        </div>
+        <div class="form-group">
+            <label for="addressDetail">상세 주소:</label>
+            <input type="text" id="addressDetail" name="addressDetail" required>
+        </div>
+        <button type="submit">추가</button>
+    </form>
+</div>
+</body>
+</html>

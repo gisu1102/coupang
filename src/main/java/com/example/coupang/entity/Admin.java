@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class AdminEntity {
+public class Admin {
     @Id
     @GeneratedValue
     @Column(name = "Admin_id")
@@ -19,7 +19,7 @@ public class AdminEntity {
     private String adminEmail; // 이메일
     private String adminPassword; //pw
 
-    public AdminEntity(String adminName,String adminEmail, String adminPassword) {
+    public Admin(String adminName, String adminEmail, String adminPassword) {
         this.adminEmail = adminEmail;
         this.adminPassword = adminPassword;
         this.adminName = adminName;

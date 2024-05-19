@@ -1,7 +1,10 @@
 package com.example.coupang.service;
 
+import com.example.coupang.dto.MemberAddressDTO;
 import com.example.coupang.dto.MemberDTO;
+import com.example.coupang.entity.MemberAddressEntity;
 import com.example.coupang.entity.MemberEntity;
+import com.example.coupang.repository.AddressRepository;
 import com.example.coupang.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class MemberServiceImpl {
 
     private final MemberRepository memberRepository;
+    private final AddressRepository addressRepository;
 
     public void save(MemberDTO memberDTO) {
         // 1. dto -> entity 변환
@@ -101,41 +105,10 @@ public class MemberServiceImpl {
             return "ok";
         }
     }
+
+
 }
 
-/*
-    public MemberResponseDto signUp(MemberRequestDto.MemberSignupReqDto signUpRequestDto) {
-
-        log.info("[MemberServiceImpl] signUp");
-        MemberEntity memberEntity = signUpRequestDto.toEntity();
-        Optional<MemberEntity> optionalFindMember = memberRepository.findByMemberEmail(memberEntity.getMemberEmail());
-        if (optionalFindMember.isPresent()) {
-            // 중복 이메일 발생
-            log.info("[ERROR] 중복 이메일 입니다.");
-            return null;
-        }
-        memberRepository.save(memberEntity); // 중복 이메일이 없다면 DB에 저장하기.
-        return new MemberResponseDto(optionalFindMember.get());
-    }
-
-    public MemberResponseDto login(MemberRequestDto.MemberLoginReqDto loginReqDto) {
-        Optional<MemberEntity> optionalFindMember = memberRepository.findByMemberEmail(loginReqDto.getMemberEmail());
-        if (optionalFindMember.isPresent()) {
-            // 조회 결과가 있다(해당 이메일을 가진 회원 정보가 있다)
-            MemberEntity memberEntity = optionalFindMember.get();
-            if (memberEntity.getMemberPassword().equals(loginReqDto.getMemberPassword())) {
-                // 비밀번호 일치
-                return new MemberResponseDto(optionalFindMember.get());
-            } else {
-                // 비밀번호 불일치(로그인실패)
-                return null;
-            }
-        } else {
-            // 조회 결과가 없다(해당 이메일을 가진 회원이 없다)
-            return null;
-        }
-    }
 
 
 
- */

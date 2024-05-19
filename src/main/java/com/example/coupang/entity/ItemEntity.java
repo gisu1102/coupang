@@ -16,6 +16,7 @@ import lombok.Setter;
 public class ItemEntity {
     @Id
     @GeneratedValue
+    @Column(name = "item_id")
     private Long id;
     private String itemName;
     private Double itemPrice;

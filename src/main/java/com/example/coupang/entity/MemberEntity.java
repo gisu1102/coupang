@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -13,12 +15,16 @@ import lombok.Setter;
 public class MemberEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    @Column(name = "member_id")
     private Long id;
     private String memberEmail;
     private String memberPassword;
     private String memberName;
-    private int wowMember;
-    private String memberAddress;
+
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberAddressEntity> memberAddressListEntity;
+
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();

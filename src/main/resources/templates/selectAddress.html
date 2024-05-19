@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>배송지 선택</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>배송지 선택</h2>
+  <div class="button-container">
+      <a href="/cart">장바구니</a>
+  </div>
+  <table>
+    <tr>
+      <th>우편주소</th>
+      <th>상세주소</th>
+      <th>수정</th>
+      <th>배송지선택</th>
+    </tr>
+    <tr th:each="memberAddress: ${addressList}">
+      <td th:text="${memberAddress.zipcode}"></td>
+      <td th:text="${memberAddress.addressDetail}"></td>
+
+      <td>
+        <!-- 수정 링크 -->
+        <a th:href="@{/addressUpdate/{memberAddress}(memberAddress=${memberAddress.id})}">수정</a>
+      </td>
+      <td>
+        <!-- 배송지 선택 버튼 -->
+        <form th:action="@{/selectAddress/{memberAddress}(memberAddressId=${memberAddress.id})}" method="post">
+          <input type="hidden" name="memberAddressId" th:value="${memberAddress.id}">
+          <button type="submit">배송지 선택</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+
+  <div id="message" style="display: none;">
+    배송지 선택 완료!
+  </div>
+
+
+</div>
+
+</body>
+</html>

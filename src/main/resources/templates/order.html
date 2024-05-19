@@ -8,23 +8,22 @@
 <body>
 <div class="container">
     <h2>쿠팡 주문 페이지</h2>
-    <a href="/member/main">메인화면</a>
+
+    <div class="button-container">
+        <a href="/member/main">메인화면</a>
+    </div>
     <table>
         <tr>
             <th>itemName</th>
             <th>itemPrice</th>
             <th>itemDetail</th>
-            <th>수정</th>
+
             <th>장바구니 담기</th>
         </tr>
         <tr th:each="item: ${itemList}">
             <td th:text="${item.itemName}"></td>
             <td th:text="${item.itemPrice}"></td>
             <td th:text="${item.itemDetail}"></td>
-            <td>
-                <!-- 수정 링크 -->
-                <a th:href="@{/adminUpdate/{itemId}(itemId=${item.id})}">수정</a>
-            </td>
             <td>
                 <!-- 장바구니 버튼 -->
                 <form th:action="@{/cart/cartAdd/{itemId}(itemId=${item.id})}" method="post">
@@ -40,22 +39,6 @@
         장바구니에 상품이 추가되었습니다!
     </div>
 
-    <script>
-        /*
-        function addToCart(form) {
-            // 장바구니에 상품 추가 로직
-            // 여기에서 AJAX를 사용하여 백엔드로 POST 요청을 보내고,
-            // 요청이 성공했을 때 메시지를 표시하거나 적절한 처리를 수행할 수 있습니다.
-
-            // 임시로 메시지를 표시하는 코드
-            document.getElementById('message').style.display = 'block';
-
-            // 페이지 이동을 막기 위해 false 반환
-            return false;
-        }
-
-         */
-    </script>
 
 </div>
 </body>

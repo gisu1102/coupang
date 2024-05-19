@@ -110,57 +110,9 @@ public class MemberController {
         System.out.println("memberEmail = " + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
         return checkResult;
-//        if (checkResult != null) {
-//            return "ok";
-//        } else {
-//            return "no";
-//        }
+
     }
 
 
-
-
-
-
-
-    /*
-    // 회원 가입
-    @GetMapping("/signup")
-    public String showSignupForm(){
-        return "signup";
-    }
-    @PostMapping("/signup")
-    public String Signup(@ModelAttribute MemberRequestDto.MemberSignupReqDto signUpRequestDto) {
-        log.info("[MemberController] signUp");
-        MemberResponseDto signupResult = memberService.signUp(signUpRequestDto);
-        if (signupResult != null) {
-            // login 성공
-            return "main";
-        } else {
-            // login 실패
-            return "login";
-        }
-    }
-
-    //로그인
-    @GetMapping("login")
-    public String loginForm() {
-        return "login";
-    }
-
-    @PostMapping("/member/login")
-    public String login(@ModelAttribute MemberRequestDto.MemberLoginReqDto loginReqDto, HttpSession session) {
-        MemberResponseDto loginResult = memberService.login(loginReqDto);
-        if (loginResult != null) {
-            // login 성공
-            session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "main";
-        } else {
-            // login 실패
-            return "login";
-        }
-    }
-
-     */
 
 }
