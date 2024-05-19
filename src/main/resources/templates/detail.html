@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+<table>
+    <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>password</th>
+        <th>name</th>
+    </tr>
+    <a href="/member/main">메인화면</a>
+    <tr>
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.memberEmail}"></td>
+        <td th:text="${member.memberPassword}"></td>
+        <td th:text="${member.memberName}"></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

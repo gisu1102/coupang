@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>myPage</h2>
+    <form action="/member/myPage" method="get">
+        session 값 확인: <p th:text="${session.loginEmail}"></p>
+        <div class="button-container">
+            <a href="/member/update" class="button">내 정보 수정하기</a>
+            <a href="/member/logout" class="button">로그아웃</a>
+            <a href="/member/main" class="button">메인페이지</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

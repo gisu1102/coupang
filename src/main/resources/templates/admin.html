@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>관리자 화면</h2>
+    <div class="button-container">
+        <a href="/adminAdd" class="button">추가</a>
+        <a href="/" class="button">초기화면</a>
+        <a href="/member/" class="button">회원목록</a>
+    </div>
+    <table>
+        <tr>
+            <th>상품 이름</th>
+            <th>상품 가격</th>
+            <th>상품 상세</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="item: ${itemList}">
+            <td th:text="${item.itemName}"></td>
+            <td th:text="${item.itemPrice}"></td>
+            <td th:text="${item.itemDetail}"></td>
+            <td>
+                <a th:href="@{/adminUpdate/{itemId}(itemId=${item.id})}" class="button">수정</a>
+            </td>
+            <td>
+                <form th:action="@{/adminDelete/{itemId}(itemId=${item.id})}" method="post">
+                    <button type="submit" class="button">삭제</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
