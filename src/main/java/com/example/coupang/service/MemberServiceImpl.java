@@ -5,6 +5,7 @@ import com.example.coupang.dto.MemberDTO;
 import com.example.coupang.entity.MemberAddressEntity;
 import com.example.coupang.entity.MemberEntity;
 import com.example.coupang.repository.AddressRepository;
+import com.example.coupang.repository.CustomRepository;
 import com.example.coupang.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +22,13 @@ public class MemberServiceImpl {
 
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
+    private final CustomRepository customRepository;
 
     public void save(MemberDTO memberDTO) {
         // 1. dto -> entity 변환
         // 2. repository의 save 메서드 호출
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-        memberRepository.save(memberEntity);
+        customRepository.saveMember(memberEntity);
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
 
@@ -66,7 +68,7 @@ public class MemberServiceImpl {
     }
 
     public MemberDTO findById(Long id) {
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        Optional<MemberEntity> optionalMemberEntity = customRepository.findMemberById(id);
         if (optionalMemberEntity.isPresent()) {
 //            MemberEntity memberEntity = optionalMemberEntity.get();
 //            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
@@ -92,7 +94,7 @@ public class MemberServiceImpl {
     }
 
     public void deleteById(Long id) {
-        memberRepository.deleteById(id);
+        customRepository.deleteById(id);
     }
 
     public String emailCheck(String memberEmail) {

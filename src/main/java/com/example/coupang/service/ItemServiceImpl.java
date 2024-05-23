@@ -4,6 +4,7 @@ import com.example.coupang.dto.ItemDTO;
 import com.example.coupang.dto.MemberDTO;
 import com.example.coupang.entity.ItemEntity;
 import com.example.coupang.entity.MemberEntity;
+import com.example.coupang.repository.CustomRepository;
 import com.example.coupang.repository.ItemRepository;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemServiceImpl {
     private final ItemRepository itemRepository;
+    private final CustomRepository customRepository;
 
     public void itemAdd(ItemDTO itemDTO) {
         ItemEntity itemEntity = ItemEntity.toItemEntity(itemDTO);
-        itemRepository.save(itemEntity);
+        customRepository.addItem(itemEntity);
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
 
@@ -38,18 +40,18 @@ public class ItemServiceImpl {
         ItemEntity itemToUpdate = optionalFindMember.get();
         itemToUpdate.itemUpdate(itemDTO);
 
-        itemRepository.save(itemToUpdate);
+        customRepository.updateItem(itemToUpdate);
     }
 
     public void delete(Long itemId) {
         Optional<ItemEntity> optionalFindMember = itemRepository.findById(itemId);
         ItemEntity itemToDelete= optionalFindMember.get();
-        itemRepository.deleteById(itemId);
+        customRepository.deleteItem(itemId);
     }
 
 
     public List<ItemDTO> getAllItems() {
-        List<ItemEntity> itemEntityList = itemRepository.findAllBy();
+        List<ItemEntity> itemEntityList = customRepository.findAllItems();
         List<ItemDTO> itemDtoList = new ArrayList<>();
 
         for (ItemEntity itemEntity : itemEntityList) {

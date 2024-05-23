@@ -3,6 +3,7 @@ package com.example.coupang.service;
 import com.example.coupang.dto.CartItemDTO;
 import com.example.coupang.dto.OrderItemDTO;
 import com.example.coupang.entity.*;
+import com.example.coupang.repository.CustomRepository;
 import com.example.coupang.repository.OrderItemRepository;
 import com.example.coupang.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +21,13 @@ import java.util.Optional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-
+    private final CustomRepository customRepository;
 
     public List<OrderItemDTO> getOrderItems(Long memberId) {
-        Optional<OrderEntity> optionalOrderEntity  = orderRepository.findByMemberEntityId(memberId);
+        Optional<OrderEntity> optionalOrderEntity  = customRepository.findByMemberEntityId(memberId);
         OrderEntity orderEntity = optionalOrderEntity.get();
 
-        List<OrderItemEntity> orderItemEntityList = orderItemRepository.findAllByOrderEntity(orderEntity);
+        List<OrderItemEntity> orderItemEntityList = customRepository.findAllByOrderEntity(orderEntity);
 
         List<OrderItemDTO> orderItemDTOs = new ArrayList<>();
 

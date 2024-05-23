@@ -24,12 +24,13 @@ public class CartService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
     private final OrderRepository orderRepository;
+    private final  CustomRepository customRepository;
 
     public List<CartItemDTO> getCartItems(Long memberId) {
-        Optional<CartEntity> optionalCartEntity  = cartRepository.findByMemberEntityId(memberId);
+        Optional<CartEntity> optionalCartEntity  = customRepository.findCartByMemberId(memberId);
         CartEntity cartEntity = optionalCartEntity.get();
 
-        List<CartItemEntity> cartItemEntityList = cartItemRepository.findAllByCartEntity(cartEntity);
+        List<CartItemEntity> cartItemEntityList = customRepository.findCartItemsByCartId(cartEntity.getId());
 
         List<CartItemDTO> cartItemDTOs = new ArrayList<>();
 
